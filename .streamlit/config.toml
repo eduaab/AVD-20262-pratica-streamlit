@@ -1,20 +1,20 @@
-# Configuração do Streamlit. Descomente e ajuste conforme o projeto avançar.
-# O tema pode ser trocado pelo menu ⋮ → Settings → Choose app theme.
+# Configuração de Identidade Visual do Streamlit (AVD 2026.2)
+# Paleta alinhada à EDA do College English Learning Dataset (Roxo #2d223a e Rosa #e9d4d0)
 
 [theme]
-paddingTop = "0.0rem"     # espaço abaixo da barra do topo (valor entre aspas)
-# font = "sans serif"     # "sans serif", "serif" ou "monospace"
+paddingTop = "1.0rem"
+font = "sans serif"
 
 [theme.light]
-primaryColor = "#c1121f"            # cor de destaque (widgets, links): mesmo vermelho dos histogramas
-backgroundColor = "#ffffff"         # fundo da página
-secondaryBackgroundColor = "#f0f2f6"  # fundo da sidebar e de widgets
-textColor = "#31333f"               # cor do texto
-borderColor = "#d5dae5"
+primaryColor = "#2d223a"            # Cor de destaque (botões, sliders, tabs)
+backgroundColor = "#ffffff"         # Fundo principal
+secondaryBackgroundColor = "#f8f9fa"  # Fundo da sidebar e cartões
+textColor = "#212529"               # Cor do texto principal
+borderColor = "#dee2e6"
 
 [theme.dark]
-primaryColor = "#c1121f"
-backgroundColor = "#0e1117"
-secondaryBackgroundColor = "#262730"
-textColor = "#fafafa"
-borderColor = "#41444e"
+primaryColor = "#e9d4d0"            # Cor de destaque no tema escuro
+backgroundColor = "#16131c"         # Fundo escuro harmonizado com o roxo
+secondaryBackgroundColor = "#241f2e"  # Fundo de widgets no escuro
+textColor = "#f8f9fa"
+borderColor = "#3d354d"
