@@ -215,24 +215,35 @@ with tab_kpis:
             {"Habilidade": "Fala", "Momento": "Pós", "Média": df_filtrado["Speaking_Post"].mean()},
         ])
 
-        grafico_comparativo = (
+        barras_comp = (
             alt.Chart(dados_comp)
-            .mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4)
+            .mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4)
             .encode(
-                x=alt.X("Momento:N", title=None, sort=["Pré", "Pós"]),
-                y=alt.Y("Média:Q", title="Nota Média (0 a 100)", scale=alt.Scale(domain=[50, 85])),
+                y=alt.Y("Habilidade:N", title=None, axis=alt.Axis(labelFontSize=13)),
+                yOffset="Momento:N",
+                x=alt.X("Média:Q", title="Nota Média (0 a 100)", scale=alt.Scale(domain=[0, 100])),
                 color=alt.Color(
                     "Momento:N",
                     scale=alt.Scale(domain=["Pré", "Pós"], range=[COR_BAIXO_GANHO, COR_ALTO_GANHO]),
-                    legend=alt.Legend(title="Avaliação"),
+                    legend=alt.Legend(title="Avaliação", orient="top", labelFontSize=12),
                 ),
-                column=alt.Column("Habilidade:N", title="Habilidade Avaliada", spacing=30),
                 tooltip=["Habilidade", "Momento", alt.Tooltip("Média:Q", format=".2f", title="Nota Média")],
             )
-            .properties(height=260)
         )
 
-        st.altair_chart(grafico_comparativo, width="stretch")
+        rotulos_comp = (
+            alt.Chart(dados_comp)
+            .mark_text(dx=20, fontSize=12, fontWeight="bold")
+            .encode(
+                y=alt.Y("Habilidade:N", title=None),
+                yOffset="Momento:N",
+                x=alt.X("Média:Q"),
+                text=alt.Text("Média:Q", format=".1f"),
+                color=alt.value("white" if separar_por_classe or True else "black"),
+            )
+        )
+
+        st.altair_chart((barras_comp + rotulos_comp).properties(height=260), width="stretch")
 
 
 # ==============================================================================
