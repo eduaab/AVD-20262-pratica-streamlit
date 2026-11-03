@@ -157,13 +157,13 @@ with tab_kpis:
         # Seleção interativa por clique no estilo de aprendizagem
         clique_estilo = alt.selection_point(name="filtro_estilo", fields=["Learning_Style"])
 
-        # Visual 1: Ganho Médio por Estilo de Aprendizagem
-        barras_estilo = (
+        # Visual 1: Ganho Médio por Estilo de Aprendizagem (Barras Horizontais para legibilidade perfeita)
+        barras_base = (
             alt.Chart(df_filtrado)
-            .mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4)
+            .mark_bar(cornerRadiusTopRight=4, cornerRadiusBottomRight=4, height=36)
             .encode(
-                x=alt.X("Learning_Style:N", title="Estilo de Aprendizagem", axis=alt.Axis(labelAngle=0)),
-                y=alt.Y("mean(ganho_medio):Q", title="Ganho Médio (pts)"),
+                y=alt.Y("Learning_Style:N", title=None, axis=alt.Axis(labelFontSize=12)),
+                x=alt.X("mean(ganho_medio):Q", title="Ganho Médio (pts)", scale=alt.Scale(domain=[0, 16])),
                 opacity=alt.condition(clique_estilo, alt.value(1.0), alt.value(0.3)),
                 color=alt.value(COR_ALTO_GANHO),
                 tooltip=[
@@ -173,7 +173,21 @@ with tab_kpis:
                 ],
             )
             .add_params(clique_estilo)
-            .properties(height=340, title="Visual 1: Ganho Médio por Estilo")
+        )
+
+        rotulos_estilo = (
+            alt.Chart(df_filtrado)
+            .mark_text(dx=18, fontSize=11, fontWeight="bold")
+            .encode(
+                y=alt.Y("Learning_Style:N", title=None),
+                x=alt.X("mean(ganho_medio):Q"),
+                text=alt.Text("mean(ganho_medio):Q", format=".1f"),
+                color=alt.value("white"),
+            )
+        )
+
+        barras_estilo = (barras_base + rotulos_estilo).properties(
+            width=280, height=300, title="Visual 1: Ganho Médio por Estilo"
         )
 
         # Visual 2: Scatter plot Tempo vs Ganho filtrado pela seleção
@@ -193,7 +207,7 @@ with tab_kpis:
                 ],
             )
             .transform_filter(clique_estilo)
-            .properties(height=340, title="Visual 2: Tempo na Plataforma vs Ganho Médio (Reativo)")
+            .properties(width=460, height=300, title="Visual 2: Tempo na Plataforma vs Ganho Médio (Reativo)")
         )
 
         st.altair_chart(barras_estilo | dispersao_tempo, width="stretch")
