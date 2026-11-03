@@ -1,21 +1,21 @@
 # Template: rascunho de layout → esqueleto do app
 
-Prompt utilizado para a geração do esqueleto inicial da aplicação na Aula 21.
+Prompt estruturado utilizado para orientar a geração do esqueleto inicial da aplicação na Aula 21.
 
 ## Contexto
-Sou estudante da CESAR School na disciplina Análise e Visualização de Dados (AVD 2026.2).
-Estou desenvolvendo uma aplicação Streamlit para analisar o desempenho de 500 estudantes universitários que utilizam uma plataforma digital de aprendizado de língua inglesa (dataset Kaggle: College English Learning). O repositório segue a estrutura padrão com as pastas `data/`, `notebooks/`, `src/`, `entregas/` e `prompts/`.
+Sou estudante de Análise e Visualização de Dados (AVD 2026.2) na CESAR School.
+Estou desenvolvendo uma aplicação em Streamlit para analisar os dados de desempenho e tempo de estudo de 500 universitários que utilizam uma plataforma digital de inglês.
 
 ## Entrada
-- Rascunho visual do layout: imagem em `entregas/rascunho-dashboard1.png`.
-- Dataset: `data/clean/dataset.csv` contendo colunas como `Prior_English_Proficiency`, `Time_Spent_Platform`, `Vocabulary_Pre`, `Vocabulary_Post`, `Vocabulary_Improvement`, `Reading_Improvement`, `Speaking_Improvement`, `ganho_medio`, `desempenho`, etc.
-- Descrição do layout pretendido: Barra lateral (sidebar) com multiselect de variáveis quantitativas e filtro de intervalo numérico (slider) para tempo de uso na plataforma. Área principal organizada com abas (`st.tabs`), contendo o painel executivo de KPIs e o Laboratório de Análise (correlação e histogramas de distribuição).
+- Rascunho de layout desenhado no papel (anexado como imagem na conversa).
+- A base de dados traz notas dos alunos antes e depois do curso, tempo de uso da plataforma, estilo de aprendizagem e frequência de estudo.
+- Layout desejado: barra lateral com filtros (seleção de variáveis e um slider para intervalo de tempo de uso) e tela principal dividida em duas abas (a primeira para métricas e KPIs e a segunda para análise estatística de correlação e distribuição).
 
 ## Restrições
-- Utilizar a biblioteca Streamlit oficial e seguir as boas práticas da Skill do Streamlit.
-- O carregamento de dados deve ser modularizado via `src/data_loader.py` utilizando cache `@st.cache_data`.
-- Manter marcações de apoio no código: `# [IA] <ferramenta> – <finalidade>`.
-- Gerar o esqueleto estrutural com containers e placeholders organizados, pronto para receber os visuais.
+- Seguir os padrões e boas práticas da Skill do Streamlit.
+- Separar o carregamento dos dados em um arquivo próprio usando cache para carregamento rápido.
+- Incluir marcações de IA no código conforme a regra da disciplina.
+- Gerar apenas a estrutura visual e os filtros, com espaços reservados para os gráficos.
 
 ## Formato de saída
-- Código limpo em arquivo único `app.py` na raiz do projeto, pronto para execução via `streamlit run app.py`.
+- Código limpo no arquivo principal da aplicação, pronto para rodar no navegador.

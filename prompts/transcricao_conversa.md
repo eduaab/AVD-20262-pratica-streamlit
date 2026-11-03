@@ -1,87 +1,132 @@
-# Registro Curado de Prompts e Interações com IA (Google Antigravity)
+# Registro de Prompts e Interações Técnicas com IA (Google Antigravity)
 
 **Disciplina:** Análise e Visualização de Dados (AVD 2026.2) – CESAR School  
 **Aluno:** Eduardo  
-**Ferramenta:** Google Antigravity (Gemini 3.8 Flash / Claude Sonnet 4.6)  
-**Escopo deste registro:** Conforme as diretrizes da Seção 5 da Declaração de Uso de IA, este arquivo contém exclusivamente as consultas e prompts técnicos que agregaram conteúdo real ao projeto (código, layout, visuais e performance). Conversas operacionais de ambiente, instalação de pacotes e dúvidas básicas de terminal foram omitidas.
+**Ferramentas:** Google Antigravity (Gemini 3.8 Flash / Claude Sonnet 4.6) | Streamlit Skills  
+**Data:** Novembro de 2026  
+**Finalidade:** Documentação técnica das consultas de código, arquitetura de layout e sintaxe de visualização para a aplicação Streamlit, em conformidade com as diretrizes da Seção 5 da Declaração de Uso de IA.
 
 ---
 
-## 📌 Sessão 1: Esqueleto Estrutural do `app.py` a partir do Rascunho de Layout (Aula 21)
-
-### 👤 Aluno (Prompt Estruturado — Template de Prompt)
-> **Contexto:** Sou aluno de AVD na CESAR School e estou criando uma aplicação Streamlit para analisar um dataset de 500 estudantes universitários que utilizam uma plataforma digital de aprendizado de inglês (`data/clean/dataset.csv`).  
-> **Entrada:** Desenhei o rascunho do layout do primeiro dashboard em `entregas/rascunho-dashboard1.png`. Ele prevê uma barra lateral fixa à esquerda com seletores e uma área principal com abas (`st.tabs`).  
-> **Restrições:** Use a biblioteca oficial do Streamlit e a Skill do Streamlit (`streamlit skills`). Separe a leitura de dados em `src/data_loader.py` com `@st.cache_data`. Gere apenas o esqueleto estrutural limpo, com placeholders nos visuais e filtros na barra lateral (multiselect de variáveis quantitativas e slider de intervalo para `Time_Spent_Platform`).  
-> **Formato de saída:** Arquivo único `app.py` executável na raiz do projeto.
-
-### 🤖 Assistente (Apoio com a Skill do Streamlit)
-* Forneceu a estrutura inicial do `app.py` utilizando `st.set_page_config(layout="wide")`.
-* Criou a barra lateral com `with st.sidebar:`, adicionando o `st.multiselect` para seleção das colunas quantitativas e o `st.slider` para filtrar o tempo na plataforma.
-* Implementou a divisão da aplicação em abas através de `tab_kpis, tab_lab = st.tabs(...)`.
-* Configurou placeholders (`st.empty` / `st.markdown`) para receber as métricas e os gráficos nas aulas seguintes.
-
----
-
-## 📌 Sessão 2: Dashboard 1 — Heatmap de Correlação e Distribuição Univariada (Aula 21)
+## 📌 Interação 1: Início da Atividade e Esqueleto a partir do Layout (Aula 21)
 
 ### 👤 Aluno
-> No **Dashboard 1 (Laboratório de Análise)**, preciso que a área principal mostre:
-> 1. Um mapa de calor de correlação de Spearman entre as variáveis selecionadas na barra lateral, em formato triangular (para não duplicar pares).
-> 2. Uma grade de histogramas com a distribuição de cada variável selecionada.
-> 3. Tudo precisa atualizar dinamicamente quando eu mudar as variáveis ou o slider de tempo na sidebar, além de mostrar alertas amigáveis caso o usuário selecione menos de 2 variáveis.
-> Como monto essa sintaxe no Altair dentro do Streamlit?
+> "Estou iniciando a atividade de criar a aplicação no Streamlit com dois dashboards baseados na minha EDA com 500 estudantes de inglês. Desenhei o rascunho de layout com uma barra lateral de filtros e a área principal dividida em duas abas (uma para o laboratório de análise e outra para os KPIs). Como podemos montar o esqueleto inicial do app.py no Streamlit seguindo as boas práticas da biblioteca?"
 
-### 🤖 Assistente (Sintaxe de Visualização com Altair)
-* Auxiliou com o cálculo da correlação via Pandas (`df_filtrado[variaveis].corr(method="spearman")`) e filtragem da matriz triangular inferior.
-* Estruturou o mapa de calor no Altair com `alt.Chart(corr).mark_rect()`, aplicando a escala divergente `purpleorange` e rótulos numéricos com `mark_text`.
-* Construiu o loop em grade de duas colunas (`st.columns(2)`) gerando histogramas binned via `alt.Chart(...).mark_bar().encode(x=alt.X(..., bin=alt.Bin(maxbins=20)))`.
-* Implementou as validações `if len(variaveis) < 2: st.warning(...)` para tratar casos de borda.
-
----
-
-## 📌 Sessão 3: Dashboard 2 — Definição e Implementação dos KPIs de Produto (Aula 22)
-
-### 👤 Aluno (Decisão Autônoma de Negócio)
-> Para o **Dashboard 2**, decidi que o público-alvo será a **Equipe de Produto da Plataforma EdTech (PMs, UX e Conteúdo)**.
-> Escolhi estas **3 métricas principais**:
-> 1. **Ganho Médio Global (`ganho_medio`):** Para medir a eficácia pedagógica da plataforma.
-> 2. **Tempo Médio de Uso (`Time_Spent_Platform`):** Para medir o engajamento dos alunos ativos.
-> 3. **Taxa de Alta Frequência (`Platform_Usage_Frequency >= 4`):** Para medir o hábito de retenção semanal.
-> Como calculo e exibo esses cartões de KPI no Streamlit usando `st.metric` com deltas comparativos?
-
-### 🤖 Assistente (Sintaxe de Métricas)
-* Auxiliou na sintaxe do Streamlit para dispor os cartões lado a lado com `col1, col2, col3 = st.columns(3)`.
-* Implementou os cartões com `st.metric`:
-  * Ganho médio formatado com duas casas decimais e delta em relação à mediana histórica da base.
-  * Tempo médio em horas com informação do tamanho da amostra filtrada no delta.
-  * Taxa percentual de alta frequência acompanhada da contagem absoluta de alunos com 4 ou mais dias de acesso semanal.
+### 🤖 Assistente (Antigravity)
+> Analisei a estrutura da sua análise exploratória e os requisitos da atividade. Para construir uma aplicação limpa e escalável no Streamlit:
+> 
+> 1. **Configuração de Página:** Iniciamos com `st.set_page_config(layout="wide")` para que os dashboards aproveitem toda a largura da tela.
+> 2. **Barra Lateral (`st.sidebar`):** Criamos os filtros globais com `st.multiselect` para seleção das variáveis quantitativas e `st.slider` dinâmico para delimitar o intervalo de tempo de dedicação na plataforma.
+> 3. **Organização em Abas (`st.tabs`):** Estruturamos a navegação principal com:
+>    ```python
+>    tab_kpis, tab_lab = st.tabs(["📊 Painel Executivo (KPIs)", "🔬 Laboratório: Distribuição e Correlação"])
+>    ```
+> 4. **Placeholders:** Deixamos recipientes organizados em cada aba para receber os cartões e as visualizações das próximas aulas.
 
 ---
 
-## 📌 Sessão 4: Dashboard 2 — Visuais Estratégicos e Cross-Filtering Interativo (Aula 22)
-
-### 👤 Aluno (Escolha e Validação de Gráficos)
-> Quero 3 visuais complementares para a equipe de produto:
-> 1. Um gráfico de barras horizontais com o **Ganho Médio por Estilo de Aprendizagem** (`Learning_Style`).
-> 2. Um **gráfico de dispersão entre Tempo na Plataforma e Ganho Médio**, colorido pela classe de desempenho.
-> 3. Uma **interatividade cruzada (cross-filtering)**: ao clicar em uma barra de estilo de aprendizagem no Visual 1, quero que o gráfico de dispersão filtre e destaque apenas os alunos daquele estilo.
-> 4. Um gráfico comparativo Pré vs Pós mostrando a evolução média em Vocabulário, Leitura e Fala em barras agrupadas horizontais.
-> Como conecto essa seleção cruzada no Altair e monto o comparativo?
-
-### 🤖 Assistente (Sintaxe do Cross-filtering e Layout no Altair)
-* Implementou o parâmetro de seleção `clique_estilo = alt.selection_point(name="filtro_estilo", fields=["Learning_Style"])`.
-* Vinculou o evento de clique nas barras horizontais ao gráfico de dispersão com `.transform_filter(clique_estilo)`.
-* Combinou os dois gráficos lado a lado na mesma linha usando o operador de concatenação do Altair: `st.altair_chart(barras_estilo | dispersao_tempo, width="stretch")`.
-* Estruturou o dataframe transformado e as barras horizontais agrupadas com `yOffset="Momento:N"` para o comparativo Pré vs Pós por habilidade.
-
----
-
-## 📌 Sessão 5: Identidade Visual e Otimização de Performance (Aulas 22 e 23)
+## 📌 Interação 2: Validação dos Dados da EDA e Carregamento com Cache (Aula 21)
 
 ### 👤 Aluno
-> Minha EDA utilizou tons de roxo e areia/rosa claro. Como passo essa identidade visual para o Streamlit reconhecer nos temas claro e escuro, e como garanto que os dados fiquem cacheados para não recarregar o CSV a cada clique?
+> "No notebook, a gente não modificou nada no CSV. O CSV permaneceu igual a como ele já estava, porque não havia duplicadas nem muitos erros faltando. Então, o CSV original já era o CSV limpo. Verifique isso para mim para ter certeza de como salvar e carregar no app."
 
-### 🤖 Assistente (Configuração e Boas Práticas)
-* Configurou o arquivo `.streamlit/config.toml` com `primaryColor = "#8338ec"`, fundos `#ffffff` (claro) e `#0f0c15` (escuro), com padding otimizado.
-* Adicionou o decorator `@st.cache_data` na função `load_data()` em `src/data_loader.py`, garantindo tempo de resposta instantâneo ao manipular os filtros.
+### 🤖 Assistente (Antigravity)
+> Verifiquei tudo detalhadamente no seu notebook e no arquivo original, e você está coberto de razão!
+> 
+> * **Zero Linhas Removidas:** O dataset tem exatamente 500 linhas do início ao fim da análise.
+> * **Zero Valores Nulos (`NaN`):** Não há dados ausentes em nenhuma das 17 colunas originais.
+> * **Zero Linhas Duplicadas:** A base é consistente e íntegra.
+> 
+> O que foi feito no notebook foi a criação das colunas enriquecidas (`ganho_medio` e classes de `desempenho`). Para a aplicação:
+> 1. No notebook, salvamos o dataframe tratado com `df.to_csv("data/clean/dataset.csv", index=False)`.
+> 2. Criamos o módulo `src/data_loader.py` com o decorador `@st.cache_data`:
+>    ```python
+>    @st.cache_data
+>    def load_data(path="data/clean/dataset.csv"):
+>        return pd.read_csv(path)
+>    ```
+>    Isso garante que o Streamlit leia os dados da memória após a primeira carga, deixando a resposta aos filtros instantânea.
+
+---
+
+## 📌 Interação 3: Dashboard 1 — Correlação de Spearman e Histogramas (Aula 21)
+
+### 👤 Aluno
+> "Me explique melhor para eu entender as decisões do Dashboard 1. Quero entender como estruturar o mapa de calor de correlação de Spearman e os histogramas no Altair para responderem aos filtros da barra lateral."
+
+### 🤖 Assistente (Antigravity)
+> O Dashboard 1 funciona como o **"Laboratório Estatístico"**: ele foi pensado para investigação livre de relações e distribuições.
+> 
+> * **Heatmap Triangular no Altair:** Calculamos a correlação com `df_filtrado[variaveis].corr(method="spearman")`. Para não poluir a tela repetindo os mesmos pares espelhados, filtramos apenas a parte triangular da matriz. No Altair, desenhamos com `mark_rect()` usando escala divergente e sobrepomos os valores numéricos com `mark_text()`.
+> * **Grade de Histogramas:** Criamos um loop que divide o espaço em duas colunas (`st.columns(2)`) e gera histogramas com agrupamento automático (`bin=alt.Bin(maxbins=20)`).
+> * **Tratamento de Exceções:** Adicionamos verificações como `if len(variaveis) < 2: st.warning(...)` para guiar o usuário caso ele desmarque as variáveis na barra lateral.
+
+---
+
+## 📌 Interação 4: Definição da Métrica de Negócio e Tempo de Uso (Aula 21/22)
+
+### 👤 Aluno
+> "Eu acho que a melhor métrica para esse contexto seria ver o tempo de uso da plataforma. Se a gente pensar na parte de negócios, a gente quer saber se, ao usar mais tempo a nossa plataforma, a pessoa estaria ou não aprendendo, para identificar erros, melhorias e esse tipo de coisa. Então, a minha decisão seria o tempo de uso da plataforma, e eu quero saber o que você acha dessa minha escolha."
+
+### 🤖 Assistente (Antigravity)
+> A sua escolha foi excelente, e o seu raciocínio de negócio foi impecável!
+> 
+> 1. **Hipótese Central de EdTech:** Em qualquer plataforma de aprendizado digital, a premissa fundamental é: *"quanto mais tempo o aluno investe na ferramenta, maior deve ser a retenção e o ganho de conhecimento"*.
+> 2. **Poder Analítico no Painel:** Usar o tempo de uso da plataforma no slider permite confrontar diretamente o volume de horas estudadas com a evolução real nas notas, identificando tanto alunos engajados quanto casos que demandam intervenção pedagógica.
+
+---
+
+## 📌 Interação 5: Dashboard 2 — Definição dos KPIs e Público-Alvo (Aula 22)
+
+### 👤 Aluno
+> "Quero escolher ganho médio, tempo médio de uso e taxa de alta frequência. Além disso, seria para a equipe de produto da plataforma EdTech."
+
+### 🤖 Assistente (Antigravity)
+> Excelente direcionamento! Focar na **Equipe de Produto da Plataforma EdTech** traz um propósito estratégico muito forte para o painel: entender eficácia, engajamento e retenção.
+> 
+> As 3 métricas que você escolheu cobrem os pilares fundamentais do produto:
+> 1. **Ganho Médio (`ganho_medio`):** Mede a eficácia do conteúdo pedagógico.
+> 2. **Tempo Médio de Uso (`Time_Spent_Platform`):** Mede o nível de engajamento dos usuários ativos.
+> 3. **Taxa de Alta Frequência (`Platform_Usage_Frequency >= 4`):** Mede a retenção e a formação de hábito semanal de estudo.
+> 
+> Para exibi-los no topo do Dashboard 2, utilizamos `col1, col2, col3 = st.columns(3)` com `st.metric()`, incluindo deltas comparativos contextuais.
+
+---
+
+## 📌 Interação 6: Dashboard 2 — Visuais e Seleção Cruzada no Altair (Aula 22)
+
+### 👤 Aluno
+> "Gostei muito da ideia de analisar o ganho por estilo de aprendizagem e a dispersão do tempo de uso vs ganho, além do comparativo de notas antes e depois. Quero aprovar esses três visuais para o Dashboard 2. Como conectamos o estilo de aprendizagem com o gráfico de dispersão para ter filtro interativo no Altair?"
+
+### 🤖 Assistente (Antigravity)
+> Para implementar a interatividade cruzada (*cross-filtering*) no Altair dentro do Streamlit:
+> 
+> 1. Criamos um objeto de seleção por clique no gráfico de barras:
+>    ```python
+>    clique_estilo = alt.selection_point(name="filtro_estilo", fields=["Learning_Style"])
+>    ```
+> 2. No gráfico de dispersão, aplicamos o filtro vinculado a esse clique:
+>    ```python
+>    dispersao = base.transform_filter(clique_estilo)
+>    ```
+> 3. Concatenamos os dois gráficos lado a lado usando o operador horizontal:
+>    ```python
+>    st.altair_chart(barras_estilo | dispersao_tempo, width="stretch")
+>    ```
+> Dessa forma, ao clicar na barra de um estilo de estudo (ex: "Visual"), o gráfico de dispersão ao lado filtra na hora apenas os alunos daquele perfil.
+
+---
+
+## 📌 Interação 7: Refinamento Visual das Barras Horizontais (Aula 22/23)
+
+### 👤 Aluno
+> "Uma correção: no visual 3 do site, era para ser um gráfico de barras horizontais. Parece um gráfico de barras horizontais, mas ele está bugado, como se fosse vertical. Temos que ajeitar isso."
+
+### 🤖 Assistente (Antigravity)
+> O problema era que o Altair estava particionando as habilidades em colunas verticais estreitas.
+> 
+> Reestruturei o código para um verdadeiro gráfico de barras horizontais emparelhadas:
+> * **Eixo Vertical (Y):** As três habilidades avaliadas (Vocabulário, Leitura e Fala).
+> * **Eixo Horizontal (X):** As notas médias (0 a 100), com as barras de Pré e Pós posicionadas lado a lado para cada habilidade através de `yOffset="Momento:N"`.
+> * **Rótulos Diretos:** Adicionamos o valor exato da média na extremidade de cada barra com `mark_text`, garantindo contraste adequado tanto no modo claro quanto no escuro.
