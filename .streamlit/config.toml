@@ -1,20 +1,20 @@
 # Configuração de Identidade Visual do Streamlit (AVD 2026.2)
-# Paleta alinhada à EDA do College English Learning Dataset (Roxo #2d223a e Rosa #e9d4d0)
+# Paleta alinhada à EDA: Roxo vibrante de alto contraste (#8338ec) e Areia/Rosa claro (#e9d4d0)
 
 [theme]
 paddingTop = "1.0rem"
 font = "sans serif"
 
 [theme.light]
-primaryColor = "#2d223a"            # Cor de destaque (botões, sliders, tabs)
+primaryColor = "#8338ec"            # Cor de destaque (botões, sliders, tabs)
 backgroundColor = "#ffffff"         # Fundo principal
 secondaryBackgroundColor = "#f8f9fa"  # Fundo da sidebar e cartões
 textColor = "#212529"               # Cor do texto principal
 borderColor = "#dee2e6"
 
 [theme.dark]
-primaryColor = "#e9d4d0"            # Cor de destaque no tema escuro
-backgroundColor = "#16131c"         # Fundo escuro harmonizado com o roxo
-secondaryBackgroundColor = "#241f2e"  # Fundo de widgets no escuro
+primaryColor = "#a855f7"            # Cor de destaque no tema escuro
+backgroundColor = "#0f0c15"         # Fundo escuro neutro
+secondaryBackgroundColor = "#1c1826"  # Fundo de widgets no escuro
 textColor = "#f8f9fa"
-borderColor = "#3d354d"
+borderColor = "#383149"

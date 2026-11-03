@@ -82,9 +82,9 @@ st.caption(
     f"Base ativa: **{len(df_filtrado)}** de **{len(df)}** alunos dentro da faixa de {intervalo_tempo[0]}h a {intervalo_tempo[1]}h na plataforma."
 )
 
-# Paleta oficial da EDA do aluno
-COR_BAIXO_GANHO = "#e9d4d0"  # Rosa claro
-COR_ALTO_GANHO = "#2d223a"   # Roxo escuro
+# Paleta oficial da EDA ajustada para alto contraste e acessibilidade visual
+COR_BAIXO_GANHO = "#e9d4d0"  # Tom de areia / rosa claro
+COR_ALTO_GANHO = "#8338ec"   # Roxo vibrante de alto contraste (visível tanto no claro quanto no escuro)
 COR_HISTOGRAMA = COR_ALTO_GANHO
 CORES_CLASSE = alt.Scale(
     domain=["Baixo ganho", "Alto ganho"],
