@@ -2,7 +2,7 @@
 
 **Disciplina:** Análise e Visualização de Dados (AVD 2026.2) – CESAR School  
 **Aluno:** Eduardo  
-**Ferramentas:** Google Antigravity (Gemini 3.8 Flash / Claude Sonnet 4.6) | Streamlit Skills  
+**Ferramentas:** Google Antigravity (Gemini 3.8 Flash) | Streamlit Skills  
 **Data:** Novembro de 2026  
 **Finalidade:** Documentação técnica das consultas de código, arquitetura de layout e sintaxe de visualização para a aplicação Streamlit, em conformidade com as diretrizes da Seção 5 da Declaração de Uso de IA.
 
