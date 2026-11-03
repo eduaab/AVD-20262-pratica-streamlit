@@ -182,7 +182,6 @@ with tab_kpis:
                 y=alt.Y("Learning_Style:N", title=None),
                 x=alt.X("mean(ganho_medio):Q"),
                 text=alt.Text("mean(ganho_medio):Q", format=".1f"),
-                color=alt.value("white"),
             )
         )
 
@@ -253,7 +252,6 @@ with tab_kpis:
                 yOffset="Momento:N",
                 x=alt.X("Média:Q"),
                 text=alt.Text("Média:Q", format=".1f"),
-                color=alt.value("white" if separar_por_classe or True else "black"),
             )
         )
 

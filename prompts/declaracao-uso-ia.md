@@ -32,7 +32,7 @@
 - **Arquivo no repositório:** [`prompts/transcricao_conversa.md`](transcricao_conversa.md)
 - **Link direto no GitHub:** [https://github.com/eduaab/AVD-20262-pratica-streamlit/blob/main/prompts/transcricao_conversa.md](https://github.com/eduaab/AVD-20262-pratica-streamlit/blob/main/prompts/transcricao_conversa.md)
 
-O arquivo acima registra o diálogo completo mantido com a ferramenta de IA durante o projeto, evidenciando as decisões autônomas do aluno e as consultas técnicas realizadas.
+O arquivo acima registra as interações técnicas curadas mantidas com a ferramenta de IA durante o projeto (apenas as consultas que agregaram valor real ao código, visuais e performance), evidenciando as decisões autônomas do aluno e o apoio focado em boas práticas e sintaxe.
 
 ---
 

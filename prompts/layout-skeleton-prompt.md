@@ -1,21 +1,21 @@
 # Template: rascunho de layout → esqueleto do app
 
-Preencha cada bloco e envie à ferramenta de IA.
+Prompt utilizado para a geração do esqueleto inicial da aplicação na Aula 21.
 
 ## Contexto
-
-<!-- Quem você é, qual a disciplina/projeto, qual o dataset e o objetivo do dashboard. -->
+Sou estudante da CESAR School na disciplina Análise e Visualização de Dados (AVD 2026.2).
+Estou desenvolvendo uma aplicação Streamlit para analisar o desempenho de 500 estudantes universitários que utilizam uma plataforma digital de aprendizado de língua inglesa (dataset Kaggle: College English Learning). O repositório segue a estrutura padrão com as pastas `data/`, `notebooks/`, `src/`, `entregas/` e `prompts/`.
 
 ## Entrada
-
-<!-- Anexe a imagem do rascunho e cite o caminho dela no repositório (ex.: entregas/rascunho-dashboard1.jpg). Informe também as colunas do dataset e as perguntas que o dashboard deve responder. -->
-
-<!-- Opcional, se a ferramenta de IA não aceitar imagem ou interpretar mal o rascunho: descreva o layout em poucas linhas (ex.: sidebar à esquerda com 2 filtros; topo com 3 métricas; abaixo, 2 gráficos lado a lado). -->
+- Rascunho visual do layout: imagem em `entregas/rascunho-dashboard1.png`.
+- Dataset: `data/clean/dataset.csv` contendo colunas como `Prior_English_Proficiency`, `Time_Spent_Platform`, `Vocabulary_Pre`, `Vocabulary_Post`, `Vocabulary_Improvement`, `Reading_Improvement`, `Speaking_Improvement`, `ganho_medio`, `desempenho`, etc.
+- Descrição do layout pretendido: Barra lateral (sidebar) com multiselect de variáveis quantitativas e filtro de intervalo numérico (slider) para tempo de uso na plataforma. Área principal organizada com abas (`st.tabs`), contendo o painel executivo de KPIs e o Laboratório de Análise (correlação e histogramas de distribuição).
 
 ## Restrições
-
-<!-- Regras que a resposta deve respeitar: biblioteca (Streamlit, plotly), arquivos a editar (app.py), carregar dados via src/data_loader.py, o que NÃO deve ser feito. -->
+- Utilizar a biblioteca Streamlit oficial e seguir as boas práticas da Skill do Streamlit.
+- O carregamento de dados deve ser modularizado via `src/data_loader.py` utilizando cache `@st.cache_data`.
+- Manter marcações de apoio no código: `# [IA] <ferramenta> – <finalidade>`.
+- Gerar o esqueleto estrutural com containers e placeholders organizados, pronto para receber os visuais.
 
 ## Formato de saída
-
-<!-- Como você quer a resposta: código completo do app.py, só o esqueleto com comentários # TODO, explicação breve de cada seção, etc. -->
+- Código limpo em arquivo único `app.py` na raiz do projeto, pronto para execução via `streamlit run app.py`.
