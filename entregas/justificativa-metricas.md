@@ -1,7 +1,7 @@
 # Justificativa das Métricas — Dashboard 2
 
 **Público-alvo escolhido:** Equipe de Produto da Plataforma EdTech (Product Managers, Designers de Aprendizagem e Engenheiros).  
-**Objetivo do painel:** Avaliar se o produto digital está entregando valor pedagógico (eficácia no aprendizado), se os usuários estão engajados (volume de uso) e se criaram o hábito de retornar com frequência à ferramenta.
+**Objetivo do painel:** Avaliar se o produto digital está entregando valor pedagógico (eficácia no aprendizado), se os usuários estão engajados e se criaram o hábito de retornar com frequência à ferramenta.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ## Métrica 3: Taxa de Alta Frequência de Uso
 - **Variável:** `Platform_Usage_Frequency` (frequência semanal de acesso, medida de 1 a 6 dias por semana).
-- **O que mede:** A proporção (%) de estudantes que utilizam a plataforma com alta regularidade, definida como 4 ou mais dias por semana (`frequência >= 4`).
+- **O que mede:** A proporção de estudantes que utilizam a plataforma com alta regularidade, definida como 4 ou mais dias por semana (`frequência >= 4`).
 - **Por que foi escolhida:** O aprendizado de um novo idioma depende fortemente da prática diária e do hábito. Para a equipe de produto, medir a taxa de usuários frequentes reflete a retenção ativa e a criação de rotina de estudo (stickiness do app).
 - **Público-alvo:** Equipe de Produto e Growth.
 - **Qual decisão pode ser apoiada por essa métrica:** Apoia decisões de disparo de notificações push, lembretes de rotina, sequências de ofensivas (streaks) e recursos de retenção para estimular o retorno contínuo dos alunos menos frequentes.
